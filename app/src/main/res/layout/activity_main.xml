@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/kiosk_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <!-- VIEW 1: CLOCK & QUICK TIMER PRESETS -->
+    <LinearLayout
+        android:id="@+id/view_presets"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="visible">
+
+        <!-- Clean Clock -->
+        <TextClock
+            android:id="@+id/clock_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:format12Hour="h:mm"
+            android:format24Hour="HH:mm"
+            android:textColor="#FFFFFF"
+            android:textSize="44sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:includeFontPadding="false" />
+
+        <!-- Date & Day -->
+        <TextClock
+            android:id="@+id/clock_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:format12Hour="EEE, MMM d"
+            android:format24Hour="EEE, d MMM"
+            android:textColor="#8E8E93"
+            android:textSize="12sp"
+            android:includeFontPadding="false" />
+
+        <!-- 2x2 Quick Timer Presets Grid (Revealed on Tap) -->
+        <LinearLayout
+            android:id="@+id/grid_presets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:visibility="gone">
+
+            <!-- Row 1: P1 & P2 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Preset 1 -->
+                <LinearLayout
+                    android:id="@+id/btn_timer_p1"
+                    android:layout_width="82dp"
+                    android:layout_height="42dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/card_bg"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:id="@+id/tv_p1_val"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5m"
+                        android:textColor="#30D158"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:includeFontPadding="false" />
+
+                    <TextView
+                        android:id="@+id/tv_p1_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:text="Quick Break"
+                        android:textColor="#8E8E93"
+                        android:textSize="9sp"
+                        android:includeFontPadding="false" />
+                </LinearLayout>
+
+                <!-- Preset 2 -->
+                <LinearLayout
+                    android:id="@+id/btn_timer_p2"
+                    android:layout_width="82dp"
+                    android:layout_height="42dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/card_bg"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:id="@+id/tv_p2_val"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10m"
+                        android:textColor="#64D2FF"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:includeFontPadding="false" />
+
+                    <TextView
+                        android:id="@+id/tv_p2_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:text="Short Task"
+                        android:textColor="#8E8E93"
+                        android:textSize="9sp"
+                        android:includeFontPadding="false" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Row 2: P3 & P4 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Preset 3 -->
+                <LinearLayout
+                    android:id="@+id/btn_timer_p3"
+                    android:layout_width="82dp"
+                    android:layout_height="42dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/card_bg"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:id="@+id/tv_p3_val"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="15m"
+                        android:textColor="#0A84FF"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:includeFontPadding="false" />
+
+                    <TextView
+                        android:id="@+id/tv_p3_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:text="Break / Call"
+                        android:textColor="#8E8E93"
+                        android:textSize="9sp"
+                        android:includeFontPadding="false" />
+                </LinearLayout>
+
+                <!-- Preset 4 -->
+                <LinearLayout
+                    android:id="@+id/btn_timer_p4"
+                    android:layout_width="82dp"
+                    android:layout_height="42dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/card_bg"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:id="@+id/tv_p4_val"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="25m"
+                        android:textColor="#FF9F0A"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:includeFontPadding="false" />
+
+                    <TextView
+                        android:id="@+id/tv_p4_lbl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:text="Pomodoro"
+                        android:textColor="#8E8E93"
+                        android:textSize="9sp"
+                        android:includeFontPadding="false" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Mode pill toggle (Day/Night) -->
+            <TextView
+                android:id="@+id/btn_mode_toggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/pill_btn_bg"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:text="Day Mode"
+                android:textColor="#8E8E93"
+                android:textSize="9sp"
+                android:clickable="true"
+                android:focusable="true" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- VIEW 2: FULL SCREEN COUNTDOWN -->
+    <LinearLayout
+        android:id="@+id/view_countdown"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="20dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_countdown_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25 MIN FOCUS"
+            android:textColor="#FF9F0A"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.08"
+            android:includeFontPadding="false" />
+
+        <TextView
+            android:id="@+id/tv_countdown_digits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="12dp"
+            android:text="25:00"
+            android:textColor="#FFFFFF"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:includeFontPadding="false" />
+
+        <!-- Cancel / Stop Pill -->
+        <TextView
+            android:id="@+id/btn_cancel_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/pill_btn_bg"
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:text="Stop Timer"
+            android:textColor="#FF453A"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true" />
+
+    </LinearLayout>
+
+    <!-- VIEW 3: TIME'S UP ALERT -->
+    <LinearLayout
+        android:id="@+id/view_times_up"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="24dp"
+        android:background="#99FF0000"
+        android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TIME'S UP!"
+            android:textColor="#FFFFFF"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:shadowColor="#000000"
+            android:shadowRadius="10" />
+
+        <TextView
+            android:id="@+id/tv_completed_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="25 min block completed"
+            android:textColor="#E0E0E0"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:shadowColor="#000000"
+            android:shadowRadius="6" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Tap to dismiss"
+            android:textColor="#CCFFFFFF"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
+</FrameLayout>

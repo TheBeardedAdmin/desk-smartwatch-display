@@ -1,0 +1,81 @@
+# Example Home Assistant Configurations for Smartwatch Desk Display
+# Replace <WATCH_IP> with your smartwatch LAN IP (e.g., <WATCH_IP>)
+# Replace <CAMERA_ENTITY> with your Home Assistant camera entity (e.g., camera.doorbell)
+
+# ============================================================
+# 1. REST Command Definition (put in configuration.yaml)
+# ============================================================
+rest_command:
+  smartwatch_notify:
+    url: "http://<WATCH_IP>:8080/notify"
+    method: POST
+    headers:
+      Content-Type: "application/json"
+    payload: >-
+      {
+        "title": "{{ title | default('Alert') }}",
+        "message": "{{ message | default('') }}",
+        "image": "{{ image | default('') }}",
+        "duration": {{ duration | default(12) }},
+        "vibrate": {{ vibrate | default(true) }}
+      }
+
+  smartwatch_timer:
+    url: "http://<WATCH_IP>:8080/timer?minutes={{ minutes | default(25) }}&label={{ label | default('POMODORO') }}"
+    method: POST
+
+# ============================================================
+# 2. Automation: Doorbell Ring -> Instant Watch Snapshot Popup
+# ============================================================
+automation:
+  - id: "smartwatch_doorbell_camera_alert"
+    alias: "Smartwatch - Doorbell Camera Alert"
+    description: "Takes a live camera snapshot and displays it on the docked smartwatch display"
+    trigger:
+      # Option A: Doorbell button binary sensor
+      - platform: state
+        entity_id: binary_sensor.doorbell_visitor
+        to: "on"
+      # Option B: Person detection sensor
+      - platform: state
+        entity_id: binary_sensor.doorbell_person_detected
+        to: "on"
+    condition: []
+    action:
+      # Step 1: Save local snapshot in Home Assistant www/ folder
+      - action: camera.snapshot
+        target:
+          entity_id: camera.doorbell_sub_stream
+        data:
+          filename: "/config/www/doorbell_snapshot.jpg"
+
+      # Small pause to allow snapshot write
+      - delay:
+          milliseconds: 400
+
+      # Step 2: Push snapshot URL directly to watch display
+      - action: rest_command.smartwatch_notify
+        data:
+          title: "Front Door"
+          message: "Visitor at the Door"
+          # Serves snapshot from Home Assistant local www directory
+          image: "http://<HOME_ASSISTANT_IP>:8123/local/doorbell_snapshot.jpg"
+          duration: 14
+          vibrate: true
+    mode: single
+
+  # ============================================================
+  # 3. Automation: Bedtime / Evening Night Mode Shift (Optional)
+  # ============================================================
+  - id: "smartwatch_bedtime_notification"
+    alias: "Smartwatch - Evening Night Reminder"
+    trigger:
+      - platform: time
+        at: "22:00:00"
+    action:
+      - action: rest_command.smartwatch_notify
+        data:
+          title: "Night Routine"
+          message: "Time to wind down"
+          duration: 6
+          vibrate: false

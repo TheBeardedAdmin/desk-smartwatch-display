@@ -1,0 +1,29 @@
+# Android Build Artifacts
+build/
+app/build/
+*.apk
+*.ap_
+*.dex
+classes.dex
+
+# Keystores & Signing Keys
+*.keystore
+*.jks
+debug.keystore
+
+# Gradle
+.gradle/
+gradlew
+gradlew.bat
+gradle/
+
+# IDE & Editor files
+.idea/
+*.iml
+.vscode/
+local.properties
+
+# OS metadata
+.DS_Store
+Thumbs.db
+*.log
